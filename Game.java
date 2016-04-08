@@ -80,12 +80,13 @@ public class Game
         if(finished){
             System.out.println("you quit the game");
         }
-        else if (cont == NUM_INTENTOS){
-            System.out.println("YOU DIED");
-        }
-        else{
+        else if(currentRoom.getDescription().equals(DESCRIPCION_FUERA)){
             System.out.println("you have saved");
         }
+        else{
+            System.out.println("YOU DIED");
+        }
+        
     }
 
     /**
