@@ -19,7 +19,9 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private static final int NUM_INTENTOS = 4;
+    private static final String DESCRIPCION_FUERA = "you're outside";
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -35,7 +37,7 @@ public class Game
     private void createRooms()
     {
         Room aula203, aula204, aula205, aula206, aula207, aula208, aula209, salida;
-      
+
         // create the rooms
         aula203 = new Room("in the aula 203");
         aula204 = new Room("in the aula 204");
@@ -44,8 +46,8 @@ public class Game
         aula207 = new Room("in the aula 207");
         aula208 = new Room("in the aula 208");
         aula209 = new Room("in the aula 209");
-        salida = new Room("you have saved");
-        
+        salida = new Room("you're outside");
+
         // initialise room exits
         aula203.setExits(aula207, aula204, null, aula206);
         aula204.setExits(aula205, null, null, aula203);
@@ -68,13 +70,22 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
         boolean finished = false;
-        while (! finished) {
+        int cont = 0;
+        while(!finished && cont < NUM_INTENTOS && !(currentRoom.getDescription().equals(DESCRIPCION_FUERA))) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            cont++;
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        if(finished){
+            System.out.println("you quit the game");
+        }
+        else if (cont == NUM_INTENTOS){
+            System.out.println("YOU DIED");
+        }
+        else{
+            System.out.println("you have saved");
+        }
     }
 
     /**
@@ -89,19 +100,22 @@ public class Game
         System.out.println();
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("north ");
+        if (!currentRoom.getDescription().equals("you're outside")){
+            if(currentRoom.northExit != null) {
+                System.out.print("north ");
+            }
+            if(currentRoom.eastExit != null) {
+                System.out.print("east ");
+            }
+            if(currentRoom.southExit != null) {
+                System.out.print("south ");
+            }
+            if(currentRoom.westExit != null) {
+                System.out.print("west ");
+            }
+
+            System.out.println();
         }
-        if(currentRoom.eastExit != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("west ");
-        }
-        System.out.println();
     }
 
     /**
@@ -128,7 +142,7 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-
+        
         return wantToQuit;
     }
 
