@@ -34,23 +34,29 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room aula203, aula204, aula205, aula206, aula207, aula208, aula209, salida;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        aula203 = new Room("in the aula 203");
+        aula204 = new Room("in the aula 204");
+        aula205 = new Room("in the aula 205");
+        aula206 = new Room("in the aula 206");
+        aula207 = new Room("in the aula 207");
+        aula208 = new Room("in the aula 208");
+        aula209 = new Room("in the aula 209");
+        salida = new Room("you have saved");
         
         // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        aula203.setExits(aula207, aula204, null, aula206);
+        aula204.setExits(aula205, null, null, aula203);
+        aula205.setExits(null, null, aula204, null);
+        aula206.setExits(null, aula203, null, null);
+        aula207.setExits(aula208, null, aula203, salida);
+        aula208.setExits(null, null, aula207, aula209);
+        aula209.setExits(null, aula208, null, null);
+        salida.setExits(null, aula207, null, null);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = aula203;  // start game aula203
     }
 
     /**
