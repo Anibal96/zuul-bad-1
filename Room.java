@@ -16,12 +16,6 @@ import java.util.HashMap;
 public class Room 
 {
     public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
-    public Room northEastExit;
     public HashMap<String, Room> salidas;
     /**
      * Create a room described "description". Initially, it has
