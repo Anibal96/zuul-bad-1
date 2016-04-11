@@ -61,4 +61,72 @@ public class Room
     {
         return description;
     }
+
+    /**
+     * devuelve el objeto de la clase Room asociado a esa salida
+     */
+    public Room getExit(String salida)
+    {
+        Room nextExit = null;
+        if(salida.equals("north")) {
+            nextExit = northExit;
+        }
+        if(salida.equals("east")) {
+            nextExit = eastExit;
+        }
+        if(salida.equals("south")) {
+            nextExit = southExit;
+        }
+        if(salida.equals("west")) {
+            nextExit = westExit;
+        }    
+        return nextExit;
+    }
+
+    /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString()
+    {
+        String exits = null;
+        if(northExit != null) {
+            exits = "north ";
+        }
+        if(eastExit != null) {
+            if(exits == null){
+                exits = "east ";
+            }
+            else{
+                exits = exits + "east ";
+            }
+        }
+        if(southExit != null) {
+            if(exits == null){
+                exits = "south ";
+            }
+            else{
+                exits = exits + "south ";
+            }
+        }
+        if(westExit != null) {
+            if(exits == null){
+                exits = "west ";
+            }
+            else{
+                exits = exits + "west ";
+            }
+        }
+        if(southEastExit != null) {
+            if(exits == null){
+                exits = "southEast ";
+            }
+            else{
+                exits = exits + "southEast ";
+            }
+        }
+        return exits;
+    }
 }
