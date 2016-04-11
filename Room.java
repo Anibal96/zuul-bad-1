@@ -37,20 +37,9 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room noroEste) 
+    public void setExits(String direction, Room neighbor) 
     {
-        if(north != null)
-            salidas.put("northExit", north);
-        if(east != null)
-            salidas.put("eastExit", east);
-        if(south != null)
-            salidas.put("southExit", south);
-        if(west != null)
-            salidas.put("westExit", west);
-        if(southEast != null)
-            salidas.put("southEastExit", southEast);
-        if(noroEste != null)
-            salidas.put("northEastExit", noroEste);
+        salidas.put(direction, neighbor);
     }
 
     /**
@@ -68,22 +57,22 @@ public class Room
     {
         Room nextExit = null;
         if(salida.equals("north")) {
-            nextExit = salidas.get("northExit");
+            nextExit = salidas.get("north");
         }
         if(salida.equals("east")) {
-            nextExit = salidas.get("eastExit");
+            nextExit = salidas.get("east");
         }
         if(salida.equals("south")) {
-            nextExit = salidas.get("southExit");
+            nextExit = salidas.get("south");
         }
         if(salida.equals("west")) {
-            nextExit = salidas.get("westExit");
+            nextExit = salidas.get("west");
         }    
         if(salida.equals("southEast")) {
-            nextExit = salidas.get("southEastExit");
+            nextExit = salidas.get("southEast");
         }
         if(salida.equals("northEast")) {
-           nextExit = salidas.get("northEastExit");
+            nextExit = salidas.get("northEast");
         }
         return nextExit;
     }
@@ -97,10 +86,10 @@ public class Room
     public String getExitString()
     {
         String exits = null;
-        if(salidas.containsKey("northExit")) {
+        if(salidas.containsKey("north")) {
             exits = "north ";
         }
-        if(salidas.containsKey("eastExit")) {
+        if(salidas.containsKey("east")) {
             if(exits == null){
                 exits = "east ";
             }
@@ -108,7 +97,7 @@ public class Room
                 exits = exits + "east ";
             }
         }
-        if(salidas.containsKey("southExit")) {
+        if(salidas.containsKey("south")) {
             if(exits == null){
                 exits = "south ";
             }
@@ -116,7 +105,7 @@ public class Room
                 exits = exits + "south ";
             }
         }
-        if(salidas.containsKey("westExit")) {
+        if(salidas.containsKey("west")) {
             if(exits == null){
                 exits = "west ";
             }
@@ -124,7 +113,7 @@ public class Room
                 exits = exits + "west ";
             }
         }
-        if(salidas.containsKey("southEastExit")) {
+        if(salidas.containsKey("southEast")) {
             if(exits == null){
                 exits = "southEast ";
             }
@@ -132,7 +121,7 @@ public class Room
                 exits = exits + "southEast ";
             }
         }
-        if(salidas.containsKey("northEastExit")) {
+        if(salidas.containsKey("northEast")) {
             if(exits == null){
                 exits = "northEast ";
             }

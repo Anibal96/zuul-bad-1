@@ -49,14 +49,22 @@ public class Game
         salida = new Room("you're outside");
 
         // initialise room exits
-        aula203.setExits(aula207, aula206, null, aula204, null, null);
-        aula204.setExits(aula205, aula203, null, null, null, null);
-        aula205.setExits(null, null, aula204, null, aula203, null);
-        aula206.setExits(null, null, null, aula203, null, null);
-        aula207.setExits(aula208, salida, aula203, null, null, aula209);
-        aula208.setExits(null, aula209, aula207, null, null, null);
-        aula209.setExits(null, null, null, aula208, null, null);
-        salida.setExits(null, null, null, aula207, null, null);
+        aula203.setExits("north", aula207);
+        aula203.setExits("east", aula206);
+        aula203.setExits("west", aula204);
+        aula204.setExits("north", aula205);
+        aula204.setExits("east", aula203);
+        aula205.setExits("south", aula204);
+        aula205.setExits("southEast", aula203);
+        aula206.setExits("west", aula203);
+        aula207.setExits("north", aula208);
+        aula207.setExits("east", salida);
+        aula207.setExits("south", aula203);
+        aula207.setExits("northEast", aula209);
+        aula208.setExits("east", aula209);
+        aula208.setExits("south", aula207);
+        aula209.setExits("west", aula208);
+        salida.setExits("west", aula207);
 
         currentRoom = aula203;  // start game aula203
     }
