@@ -39,14 +39,14 @@ public class Game
         Room aula203, aula204, aula205, aula206, aula207, aula208, aula209, salida;
 
         // create the rooms
-        aula203 = new Room("in the aula 203");
-        aula204 = new Room("in the aula 204");
-        aula205 = new Room("in the aula 205");
-        aula206 = new Room("in the aula 206");
-        aula207 = new Room("in the aula 207");
-        aula208 = new Room("in the aula 208");
-        aula209 = new Room("in the aula 209");
-        salida = new Room("you're outside");
+        aula203 = new Room("in the aula 203","DAM",1);
+        aula204 = new Room("in the aula 204","Filosofia",2);
+        aula205 = new Room("in the aula 205","HE", 10);
+        aula206 = new Room("in the aula 206","Extintor", 5);
+        aula207 = new Room("in the aula 207",null,0);
+        aula208 = new Room("in the aula 208","mochila", 10);
+        aula209 = new Room("in the aula 209",null,0);
+        salida = new Room("you're outside",null,0);
 
         // initialise room exits
         aula203.setExits("north", aula207);
@@ -181,8 +181,6 @@ public class Game
         }
         else {
             currentRoom = room;
-            System.out.println("You are " + currentRoom.getDescription());
-            System.out.print("Exits: ");
             System.out.println(currentRoom.getLongDescription());
         }
     }
