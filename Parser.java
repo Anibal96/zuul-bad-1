@@ -62,4 +62,12 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+    
+    /**
+     * Metodo que devuelve el objeto de la clase commandWords
+     */
+    public CommandWords getCommandWords()
+    {
+        return commands;
+    }
 }
