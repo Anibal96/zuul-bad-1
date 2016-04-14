@@ -66,8 +66,8 @@ public class Parser
     /**
      * Metodo que devuelve el objeto de la clase commandWords
      */
-    public CommandWords getCommandWords()
+    public void getCommandWords()
     {
-        return commands;
+       commands.showAll();
     }
 }
