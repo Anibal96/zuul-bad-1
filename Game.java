@@ -20,7 +20,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Room lastRoom;
-    private static final int NUM_INTENTOS = 4;
+    private static final int NUM_INTENTOS = 100;
     private static final String DESCRIPCION_FUERA = "you're outside";
 
     /**
@@ -134,11 +134,16 @@ public class Game
             currentRoom.seeItems();
         }
         else if (commandWord.equals("back")) {
-            currentRoom = lastRoom;
-            System.out.println(currentRoom.getLongDescription());
+            if(currentRoom == lastRoom || currentRoom.getDescription().equals("in the aula 203")){
+                System.out.println("You can't back 2 times or you dont move");
+            }
+            else{
+                currentRoom = lastRoom;
+                System.out.println(currentRoom.getLongDescription());
+            }
         }
-
-        return wantToQuit;
+            return wantToQuit;
+        
     }
 
     // implementations of user commands:
