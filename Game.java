@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room lastRoom;
     private static final int NUM_INTENTOS = 4;
     private static final String DESCRIPCION_FUERA = "you're outside";
 
@@ -132,6 +133,10 @@ public class Game
         else if (commandWord.equals("inspect")) {
             currentRoom.seeItems();
         }
+        else if (commandWord.equals("back")) {
+            currentRoom = lastRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
 
         return wantToQuit;
     }
@@ -178,7 +183,7 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-
+        lastRoom = currentRoom;
         Room room = currentRoom.getExit(direction);
 
         if (room== null) {
