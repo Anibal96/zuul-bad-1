@@ -51,4 +51,30 @@ public class Player
             System.out.println("you can't grab this object");
         }
     }
+
+    /**
+     * Metodo que devuelve el objeto dropeade o
+     * null en caso de no encontralo
+     */
+    public Objeto dropItem(String descripcion)
+    {
+        Objeto objeto = null;
+        for(int cont = 0; cont < objetos.size() && objeto == null ; cont++){
+            if(objetos.get(cont).getDescripcion().equals(descripcion)){
+                objeto = objetos.remove(cont);
+            }
+        }
+        return objeto;
+    }
+
+    /**
+     * Metodo que imprime los datos de los objetos
+     */
+    public void infoItem(){
+        int cont = 1;
+        for(Objeto objeto : objetos){
+            System.out.println("Item nº " + cont + "\n" + objeto);
+            cont++;
+        }
+    }
 }

@@ -147,8 +147,14 @@ public class Game
         else if(commandWord.equals("take")){
             takeItem(command.getSecondWord());
         }
-            return wantToQuit;
-        
+        else if(commandWord.equals("drop")){
+            dropItem(command.getSecondWord());
+        }
+        else if(commandWord.equals("item")){
+            player.infoItem();
+        }
+        return wantToQuit;
+
     }
 
     // implementations of user commands:
@@ -204,7 +210,7 @@ public class Game
             System.out.println(player.getRoom().getLongDescription());
         }
     }
-    
+
     /**
      * Metodo que entrega el objeto al jugador
      */
@@ -214,6 +220,21 @@ public class Game
         if(object!=null){
             player.addItem(object);
             System.out.println("You take " + object.getDescripcion());
+        }
+        else{
+            System.out.println("item not found");
+        }
+    }
+
+    /**
+     * Metodo que deja el objeto dropeado
+     */
+    private void dropItem(String descripcionItem)
+    {
+        Objeto object = player.dropItem(descripcionItem);
+        if(object!=null){
+            player.getRoom().addItem(object.getDescripcion(),object.getPeso());
+            System.out.println("You drop " + object.getDescripcion() + " in " + player.getRoom().getDescription());
         }
         else{
             System.out.println("item not found");
