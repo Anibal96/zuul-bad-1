@@ -19,7 +19,7 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
     private Stack<Room> lastRooms;
     private static final int NUM_INTENTOS = 100;
     private static final String DESCRIPCION_FUERA = "you're outside";
@@ -71,7 +71,7 @@ public class Game
         aula209.setExits("west", aula208);
         salida.setExits("west", aula207);
 
-        currentRoom = aula203;  // start game aula203
+        player = new Player(aula203);  // start game aula203
     }
 
     /**
@@ -85,7 +85,7 @@ public class Game
         // execute them until the game is over.
         boolean finished = false;
         int cont = 0;
-        while(!finished && cont < NUM_INTENTOS && !(currentRoom.getDescription().equals(DESCRIPCION_FUERA))) {
+        while(!finished && cont < NUM_INTENTOS && !(player.getRoom().getDescription().equals(DESCRIPCION_FUERA))) {
             Command command = parser.getCommand();
             finished = processCommand(command);
             cont++;
@@ -93,7 +93,7 @@ public class Game
         if(finished){
             System.out.println("you quit the game");
         }
-        else if(currentRoom.getDescription().equals(DESCRIPCION_FUERA)){
+        else if(player.getRoom().getDescription().equals(DESCRIPCION_FUERA)){
             System.out.println("you have saved");
         }
         else{
@@ -127,21 +127,21 @@ public class Game
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(player.getRoom().getLongDescription());
         }
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }
         else if (commandWord.equals("inspect")) {
-            currentRoom.seeItems();
+            player.getRoom().seeItems();
         }
         else if (commandWord.equals("back")) {
             if(lastRooms.empty()){
                 System.out.println("You can't back 2 times or you dont move");
             }
             else{
-                currentRoom = lastRooms.pop();
-                System.out.println(currentRoom.getLongDescription());
+                player.move(lastRooms.pop());
+                System.out.println(player.getRoom().getLongDescription());
             }
         }
             return wantToQuit;
@@ -174,7 +174,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getRoom().getLongDescription());
     }
 
     /** 
@@ -190,15 +190,15 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-        lastRooms.push(currentRoom);
-        Room room = currentRoom.getExit(direction);
+        lastRooms.push(player.getRoom());
+        Room room = player.getRoom().getExit(direction);
 
         if (room== null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = room;
-            System.out.println(currentRoom.getLongDescription());
+            player.move(room);
+            System.out.println(player.getRoom().getLongDescription());
         }
     }
 
