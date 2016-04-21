@@ -170,4 +170,22 @@ public class Room
             System.out.println(objeto.toString());
         }
     }
+    
+    /**
+     * Metodo que elimina un objeto y lo devuelve
+     * en caso de no encontrarlo devuelve null
+     */
+    public Objeto removeItem(String descripcionItem)
+    {
+        Objeto object = null;
+        int cont = 0;
+        for(Objeto objeto:objetos){
+            if(objeto.getDescripcion().equals(descripcionItem)){
+                object = objeto;
+            }
+            cont++;
+        }
+        return object;
+    }
+    
 }
