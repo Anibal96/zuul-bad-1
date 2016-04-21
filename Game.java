@@ -71,7 +71,7 @@ public class Game
         aula209.setExits("west", aula208);
         salida.setExits("west", aula207);
 
-        player = new Player(aula203);  // start game aula203
+        player = new Player(aula203,25f);  // start game aula203
     }
 
     /**
@@ -144,6 +144,9 @@ public class Game
                 System.out.println(player.getRoom().getLongDescription());
             }
         }
+        else if(commandWord.equals("take")){
+            takeItem(command.getSecondWord());
+        }
             return wantToQuit;
         
     }
@@ -199,6 +202,21 @@ public class Game
         else {
             player.move(room);
             System.out.println(player.getRoom().getLongDescription());
+        }
+    }
+    
+    /**
+     * Metodo que entrega el objeto al jugador
+     */
+    private void takeItem(String descripcionItem)
+    {
+        Objeto object = player.getRoom().removeItem(descripcionItem);
+        if(object!=null){
+            player.addItem(object);
+            System.out.println("You take " + object.getDescripcion());
+        }
+        else{
+            System.out.println("item not found");
         }
     }
 
