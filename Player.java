@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 /**
  * Write a description of class Player here.
  * 
@@ -10,6 +11,7 @@ public class Player
     private Room currentRoom;
     private ArrayList<Objeto> objetos;
     private static float cargaMaxima;
+    private Stack<Room> lastRooms;
     private float cargaActual;
     /**
      * Constructor for objects of class Player
@@ -19,6 +21,7 @@ public class Player
         this.currentRoom = currentRoom;
         this.cargaMaxima = cargaMaxima;
         cargaActual = 0f;
+        lastRooms = new Stack<Room>();
         objetos = new ArrayList<Objeto>();
     }
 
@@ -36,6 +39,31 @@ public class Player
     public Room getRoom()
     {
         return currentRoom;
+    }
+    
+    /**
+     * Metodo que devuelve la ultima habitacione por la que paso el jugador.
+     */
+    public Room getLastRoom()
+    {
+        return lastRooms.pop();
+    }
+    
+    /**
+     * Metodo que comprueba si se puede retroceder de sala 
+     * devuelve true en caso afirmativo y false en caso contrario
+     */
+    public boolean isEmpty()
+    {
+        return lastRooms.empty();
+    }
+    
+    /**
+     * Añade una habitacion a la lista de habitaciones visitadas
+     */
+    public void addLastRoom()
+    {
+        lastRooms.push(currentRoom);
     }
 
     /**
