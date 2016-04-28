@@ -42,6 +42,23 @@ public class Player
     }
     
     /**
+     * Metodo que devuelve el valor de la carga actual del jugador
+     */
+    public float getCargaActual()
+    {
+        return cargaActual;
+    }
+    
+    
+    /**
+     * Metodo que devuelve la carga maxima del jugador
+     */
+    public float getCargaMaxima()
+    {
+        return cargaMaxima;
+    }
+    
+    /**
      * Metodo que devuelve la ultima habitacione por la que paso el jugador.
      */
     public Room getLastRoom()
@@ -89,6 +106,7 @@ public class Player
         Objeto objeto = null;
         for(int cont = 0; cont < objetos.size() && objeto == null ; cont++){
             if(objetos.get(cont).getDescripcion().equals(descripcion)){
+                cargaActual -= objetos.get(cont).getPeso();
                 objeto = objetos.remove(cont);
             }
         }

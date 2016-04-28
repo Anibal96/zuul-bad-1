@@ -172,10 +172,10 @@ public class Room
     }
     
     /**
-     * Metodo que elimina un objeto y lo devuelve
+     * Metodo que devuelve un objeto y lo devuelve
      * en caso de no encontrarlo devuelve null
      */
-    public Objeto removeItem(String descripcionItem)
+    public Objeto inspectItem(String descripcionItem)
     {
         Objeto object = null;
         int cont = 0;
@@ -188,4 +188,15 @@ public class Room
         return object;
     }
     
+    /**
+     * Metodo que elimina el objeto de la sala en caso de encontrarlo
+     */
+    public void deleteItem(String descripcionItem)
+    {
+        for(int i = 0;i<objetos.size();i++){
+            if(objetos.get(i).getDescripcion().equals(descripcionItem)){
+                objetos.remove(i);
+            }
+        }
+    }
 }

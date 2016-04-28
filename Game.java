@@ -46,6 +46,7 @@ public class Game
         aula205 = new Room("in the aula 205");
         aula206 = new Room("in the aula 206");
         aula207 = new Room("in the aula 207");
+        aula207.addItem("Mesa", 20);
         aula208 = new Room("in the aula 208");
         aula209 = new Room("in the aula 209");
         salida = new Room("you're outside");
@@ -68,7 +69,7 @@ public class Game
         aula209.setExits("west", aula208);
         salida.setExits("west", aula207);
 
-        player = new Player(aula203,25f);  // start game aula203
+        player = new Player(aula203,15f);  // start game aula203
     }
 
     /**
@@ -134,7 +135,7 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             if(player.isEmpty()){
-                System.out.println("You can't back 2 times or you dont move");
+                System.out.println("You can't back or you dont move");
             }
             else{
                 player.move(player.getLastRoom());
@@ -213,14 +214,19 @@ public class Game
      */
     private void takeItem(String descripcionItem)
     {
-        Objeto object = player.getRoom().removeItem(descripcionItem);
-        if(object!=null){
-            player.addItem(object);
-            System.out.println("You take " + object.getDescripcion());
-        }
-        else{
+        Objeto objeto = player.getRoom().inspectItem(descripcionItem);
+        if(objeto == null){
             System.out.println("item not found");
         }
+        else if (objeto.getPeso()+player.getCargaActual()>player.getCargaMaxima()){
+            System.out.println("the object is too heavy");
+        }
+        else{
+            player.addItem(objeto);
+            System.out.println("You take " + objeto.getDescripcion());
+            player.getRoom().deleteItem(descripcionItem);
+        }
+
     }
 
     /**
