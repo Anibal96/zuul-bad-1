@@ -222,9 +222,14 @@ public class Game
             System.out.println("the object is too heavy");
         }
         else{
-            player.addItem(objeto);
-            System.out.println("You take " + objeto.getDescripcion());
-            player.getRoom().deleteItem(descripcionItem);
+            if(objeto.getTake()){
+                player.addItem(objeto);
+                System.out.println("You take " + objeto.getDescripcion());
+                player.getRoom().deleteItem(descripcionItem);
+            }
+            else{
+                System.out.println("You can't take this item");
+            }
         }
 
     }
@@ -236,18 +241,11 @@ public class Game
     {
         Objeto object = player.dropItem(descripcionItem);
         if(object!=null){
-            if(object.getTake()){
-                player.getRoom().addItem(object.getDescripcion(),object.getPeso(),true);
-                System.out.println("You drop " + object.getDescripcion() + " in " + player.getRoom().getDescription());
-            }
-        }
-        else{
-            if(object.getTake()){
-            System.out.println("You can't take this item");
+            player.getRoom().addItem(object.getDescripcion(),object.getPeso(),true);
+            System.out.println("You drop " + object.getDescripcion() + " in " + player.getRoom().getDescription());
         }
         else{
             System.out.println("item not found");
-        }
         }
     }
 
