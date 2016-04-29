@@ -113,7 +113,41 @@ public class Game
             System.out.println("I don't know what you mean...");
             return false;
         }
-
+        switch(command.getCommandWord()){
+            case GO:
+            goRoom(command);
+            break;
+            case QUIT:
+            wantToQuit = quit(command);
+            break;
+            case HELP:
+            printHelp();
+            break;
+            case LOOK:
+            System.out.println(player.getRoom().getLongDescription());
+            break;
+            case EAT:
+            System.out.println("Acabas de comer y no estaras hambriento en mucho tiempo");
+            break;
+            case BACK:
+            if(player.isEmpty()){
+                System.out.println("You can't back or you dont move");
+            }
+            else{
+                player.move(player.getLastRoom());
+                System.out.println(player.getRoom().getLongDescription());
+            }
+            break;
+            case TAKE:
+            takeItem(command.getSecondWord());
+            break;
+            case DROP:
+            dropItem(command.getSecondWord());
+            break;
+            case ITEMS:
+            player.infoItem();
+            break;
+        }
         Option commandWord = command.getCommandWord();
         if (commandWord.equals(Option.HELP)) {
             printHelp();
