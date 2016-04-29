@@ -48,4 +48,20 @@ public class CommandWords
     public void showAll(){
         System.out.println(comandos.keySet());
     }
+    
+    /**
+     * Return the object Option associated with a word.
+     * @param commandWord The word to look up (as a string).
+     * @return the object Option correspondng to the paramater commandWord, or the object Option.UNKNOWN
+     *         if it is not a valid command word
+     */
+    public Option getCommandWord(String commandWord)
+    {
+        Option option = Option.UNKNOWN;
+        if(comandos.containsKey(commandWord)){
+            option = comandos.get(commandWord);
+        }
+        return option;
+    }
+    
 }
