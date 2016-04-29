@@ -156,9 +156,9 @@ public class Room
     /**
      * Metodo que permite añadir items a la habitacion
      */
-    public void addItem(String descripcion, int peso)
+    public void addItem(String descripcion, int peso, boolean take)
     {
-        objetos.add(new Objeto(descripcion, peso));
+        objetos.add(new Objeto(descripcion, peso, take));
     }
     
     /**

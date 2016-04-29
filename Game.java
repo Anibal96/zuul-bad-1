@@ -40,13 +40,13 @@ public class Game
 
         // create the rooms
         aula203 = new Room("in the aula 203");
-        aula203.addItem("Mapa", 0);
-        aula203.addItem("Extintor", 5);
+        aula203.addItem("Mapa", 0, false);
+        aula203.addItem("Extintor", 5, true);
         aula204 = new Room("in the aula 204");
         aula205 = new Room("in the aula 205");
         aula206 = new Room("in the aula 206");
         aula207 = new Room("in the aula 207");
-        aula207.addItem("Mesa", 20);
+        aula207.addItem("Mesa", 20, false);
         aula208 = new Room("in the aula 208");
         aula209 = new Room("in the aula 209");
         salida = new Room("you're outside");
@@ -236,11 +236,18 @@ public class Game
     {
         Objeto object = player.dropItem(descripcionItem);
         if(object!=null){
-            player.getRoom().addItem(object.getDescripcion(),object.getPeso());
-            System.out.println("You drop " + object.getDescripcion() + " in " + player.getRoom().getDescription());
+            if(object.getTake()){
+                player.getRoom().addItem(object.getDescripcion(),object.getPeso(),true);
+                System.out.println("You drop " + object.getDescripcion() + " in " + player.getRoom().getDescription());
+            }
+        }
+        else{
+            if(object.getTake()){
+            System.out.println("You can't take this item");
         }
         else{
             System.out.println("item not found");
+        }
         }
     }
 

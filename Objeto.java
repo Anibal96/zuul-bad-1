@@ -9,13 +9,15 @@ public class Objeto
 {
     private int peso;
     private String descripcion;
+    private boolean take;
     /**
      * Constructor for objects of class Objeto
      */
-    public Objeto(String descripcion, int peso)
+    public Objeto(String descripcion, int peso, boolean take)
     {
         this.descripcion = descripcion;
         this.peso = peso;
+        this.take = take;
     }
 
     /**
@@ -24,6 +26,14 @@ public class Objeto
     public int getPeso()
     {
         return peso;
+    }
+    
+    /**
+     * Metodo que devuelve si el objeto se puede cojer o no
+     */
+    public boolean getTake()
+    {
+        return take;
     }
     
     /**
