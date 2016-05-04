@@ -108,7 +108,7 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
+        Option commandWord = command.getCommandWord();
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -138,6 +138,9 @@ public class Game
                 System.out.println(player.getRoom().getLongDescription());
             }
             break;
+            case INSPECT:
+            player.getRoom().seeItems();
+            break;
             case TAKE:
             takeItem(command.getSecondWord());
             break;
@@ -148,43 +151,7 @@ public class Game
             player.infoItem();
             break;
         }
-        Option commandWord = command.getCommandWord();
-        if (commandWord.equals(Option.HELP)) {
-            printHelp();
-        }
-        else if (commandWord.equals(Option.GO)) {
-            goRoom(command);
-        }
-        else if (commandWord.equals(Option.QUIT)) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord.equals(Option.LOOK)) {
-            System.out.println(player.getRoom().getLongDescription());
-        }
-        else if (commandWord.equals(Option.EAT)) {
-            System.out.println("You have eaten now and you are not hungry any more");
-        }
-        else if (commandWord.equals(Option.INSPECT)) {
-            player.getRoom().seeItems();
-        }
-        else if (commandWord.equals(Option.BACK)) {
-            if(player.isEmpty()){
-                System.out.println("You can't back or you dont move");
-            }
-            else{
-                player.move(player.getLastRoom());
-                System.out.println(player.getRoom().getLongDescription());
-            }
-        }
-        else if(commandWord.equals(Option.TAKE)){
-            takeItem(command.getSecondWord());
-        }
-        else if(commandWord.equals(Option.DROP)){
-            dropItem(command.getSecondWord());
-        }
-        else if(commandWord.equals(Option.ITEMS)){
-            player.infoItem();
-        }
+        
         return wantToQuit;
 
     }
