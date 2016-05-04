@@ -20,16 +20,10 @@ public class CommandWords
     public CommandWords()
     {
         comandos = new HashMap<String,Option>();
-        comandos.put("andare",Option.GO);
-        comandos.put("smettere",Option.QUIT);
-        comandos.put("aiuto",Option.HELP);
-        comandos.put("guarda",Option.LOOK);
-        comandos.put("mangiare",Option.EAT);
-        comandos.put("ispezionare",Option.INSPECT);
-        comandos.put("indietro",Option.BACK);
-        comandos.put("prendere",Option.TAKE);
-        comandos.put("far-cadere",Option.DROP);
-        comandos.put("articolo",Option.ITEMS);
+        Option[] comands = Option.values();
+        for (Option option : comands) {
+            comandos.put(option.getComando(), option);
+        }
     }
 
     /**
