@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Player player;
+    private int turnos;
     private static final String DESCRIPCION_FUERA = "you're outside";
 
     /**
@@ -28,6 +29,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        turnos = 10;
     }
 
     /**
@@ -81,15 +83,23 @@ public class Game
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
         boolean finished = false;
-        while(!finished && !(player.getRoom().getDescription().equals(DESCRIPCION_FUERA))) {
+        int cont = 0;
+        while(!finished && cont < turnos && !(player.getRoom().getDescription().equals(DESCRIPCION_FUERA))) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            cont++;
+            if((turnos-cont)>0){
+                System.out.println("Te quedan " + (turnos-cont) + " turnos");
+            }
         }
         if(finished){
             System.out.println("you quit the game");
         }
         else if(player.getRoom().getDescription().equals(DESCRIPCION_FUERA)){
             System.out.println("you have saved");
+        }
+        else{
+            System.out.println("YOU DIE");
         }
     }
 
@@ -144,7 +154,7 @@ public class Game
             player.infoItem();
             break;
         }
-        
+
         return wantToQuit;
 
     }
