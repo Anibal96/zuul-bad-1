@@ -145,7 +145,7 @@ public class Room
     {
         String item;
         if(objetos.size() > 0){
-            item = "This room have " + objetos.size() + " items use 'ispezionare' for see";
+            item = "This room have " + objetos.size() + " items use '" + Option.INSPECT.getComando() + "' for see";
         }
         else{
             item = "This room dont have items";
