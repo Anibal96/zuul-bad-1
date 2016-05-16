@@ -41,17 +41,18 @@ public class Game
 
         // create the rooms
         aula203 = new Room("in the aula 203");
-        aula203.addItem("Mapa", 0, false);
-        aula203.addItem("Extintor", 5, true);
         aula204 = new Room("in the aula 204");
         aula205 = new Room("in the aula 205");
         aula206 = new Room("in the aula 206");
         aula207 = new Room("in the aula 207");
-        aula207.addItem("Mesa", 20, false);
         aula208 = new Room("in the aula 208");
         aula209 = new Room("in the aula 209");
         salida = new Room("you're outside");
-
+        
+        aula205.addItem("Mesa", 20, false);
+        aula206.addItem("Mapa", 0, true);
+        aula203.addItem("Extintor", 5, true);
+        
         // initialise room exits
         aula203.setExits("north", aula207);
         aula203.setExits("east", aula206);
@@ -152,6 +153,28 @@ public class Game
             break;
             case ITEMS:
             player.infoItem();
+            break;
+            case USE:
+            if(player.inspectItem(command.getSecondWord()).getDescripcion().equals("Extintor")){
+                if(turnos == 10){
+                    turnos = turnos + 5;
+                    System.out.println("You have 5 turns more for use 'Extintor'");
+                }
+                else{
+                    System.out.println("the 'Extintor' is empty");
+                }
+            }
+            else if(player.inspectItem(command.getSecondWord()).getDescripcion().equals("Mapa")){
+                if(player.getRoom().getDescription().equals("in the aula 205")){
+                    System.out.println("You can exit east of aula207");
+                }
+                else{
+                    System.out.println("This room don't have a table");
+                }
+            }
+            else{
+                System.out.println("You dont have ");
+            }
             break;
         }
 

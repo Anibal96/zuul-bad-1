@@ -123,4 +123,18 @@ public class Player
             cont++;
         }
     }
+    
+    /**
+     * Metodo que busca un objeto por su descripcion en el inventario y lo devuelve
+     * o null en caso de no encontrarlo
+     */
+    public Objeto inspectItem(String descripcion){
+        Objeto objeto = null;
+        for(int cont = 0; cont < objetos.size() && objeto == null ; cont++){
+            if(objetos.get(cont).getDescripcion().equals(descripcion)){
+                objeto = objetos.get(cont);
+            }
+        }
+        return objeto;
+    }
 }

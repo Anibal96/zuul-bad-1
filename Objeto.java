@@ -45,6 +45,13 @@ public class Objeto
     }
     
     /**
+     * Metodo que usa el objeto
+     */
+    public void useObject()
+    {
+        
+    }
+    /**
      * metodo para imprimir los datos del objeto
      */
     public String toString()
